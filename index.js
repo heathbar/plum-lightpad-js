@@ -18,34 +18,33 @@ function mergeLightpads(cloud, local) {
  * @param {string} user username for online plum account
  * @param {string=} password password for online plum account
  */
-module.exports = function Plum(user, password) {
-    return {
-        discover: () => {
-            let subject = new Rx.Subject(),
-            cloudDevices = [],
-            localDevices = [];
+module.exports = class Plum {
 
-            discovery.getCloudData(user, password).subscribe((cloudDevice) => {
-                cloudDevices.push(cloudDevice);
-                
-                // check for matching local device
-                let localDevice = _.find(localDevices, {id: cloudDevice.lpid});
-                if (localDevice) {
-                    subject.next(new PlumLightpad(cloudDevice, localDevice));
-                }
-            });
+    static discover(user, password) {
+        let subject = new Rx.Subject(),
+        cloudDevices = [],
+        localDevices = [];
 
-            discovery.findLocalLightpads().subscribe((localDevice) => {
-                localDevices.push(localDevice);
-                
-                // check for matching cloud device
-                let cloudDevice = _.find(cloudDevices, {lpid: localDevice.id});
-                if (cloudDevice) {
-                    subject.next(new PlumLightpad(cloudDevice, localDevice));
-                }
-            });
+        discovery.getCloudData(user, password).subscribe((cloudDevice) => {
+            cloudDevices.push(cloudDevice);
+            
+            // check for matching local device
+            let localDevice = _.find(localDevices, {id: cloudDevice.lpid});
+            if (localDevice) {
+                subject.next(new PlumLightpad(cloudDevice, localDevice));
+            }
+        });
 
-            return subject.asObservable();
-        }
-    };
-};
+        discovery.findLocalLightpads().subscribe((localDevice) => {
+            localDevices.push(localDevice);
+            
+            // check for matching cloud device
+            let cloudDevice = _.find(cloudDevices, {lpid: localDevice.id});
+            if (cloudDevice) {
+                subject.next(new PlumLightpad(cloudDevice, localDevice));
+            }
+        });
+
+        return subject.asObservable();
+    }
+}

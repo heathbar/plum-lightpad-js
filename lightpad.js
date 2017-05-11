@@ -34,6 +34,10 @@ module.exports = class PlumLightpad {
     }
 
     getLevel() {
+        return this.getMetrics();
+    }
+
+    getMetrics() {
         return this.post('/v2/getLogicalLoadMetrics', { 'llid': this.llid });
     }
 
