@@ -1,6 +1,6 @@
 {
   "name": "plum-lightpad",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "description": "node API to interact with plum lightpads",
   "main": "index.js",
   "types": "index.d.ts",
