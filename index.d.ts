@@ -1,23 +1,21 @@
 import { Observable } from 'rxjs';
-import { Response } from 'request-promise-native';
+import { FullResponse } from 'request-promise-native';
 
 export = Plum;
+
+declare class Plum {
+    static discover(user: string, password: string): Observable<Plum.Lightpad>;
+}
 
 /*~ If you want to expose types from your module as well, you can
  *~ place them in this block.
  */
 declare namespace Plum {
-
-    class Plum {
-        static discover(user: string, password: string): Observable<Plum.Lightpad>;
-    }
-
     export interface Lightpad {
-        constructor(cloudData: any, localData: any);
         getLevel(): Promise<LogicalLoadMetrics>;
         getMetrics(): Promise<LogicalLoadMetrics>;
         setLevel(level: number): Promise<void>;
-        post(): Promise<Response>;
+        post(): Promise<FullResponse>;
         config: LightpadConfig;
         is_provisioned: boolean;
         llid: string;
