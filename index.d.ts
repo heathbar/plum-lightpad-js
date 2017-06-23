@@ -3,14 +3,15 @@ import { Response } from 'request-promise-native';
 
 export = Plum;
 
-declare class Plum {
-    static discover(user: string, password: string): Observable<Plum.Lightpad>;
-}
-
 /*~ If you want to expose types from your module as well, you can
  *~ place them in this block.
  */
 declare namespace Plum {
+
+    class Plum {
+        static discover(user: string, password: string): Observable<Plum.Lightpad>;
+    }
+
     export interface Lightpad {
         constructor(cloudData: any, localData: any);
         getLevel(): Promise<LogicalLoadMetrics>;
