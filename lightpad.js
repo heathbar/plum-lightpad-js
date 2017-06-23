@@ -49,7 +49,7 @@ module.exports = class PlumLightpad {
     }
 
     setLevel(level) {
-        return this.post('/v2/setLogicalLoadLevel', { llid: this.llid, level: level });
+        return this.post('/v2/setLogicalLoadLevel', { llid: this.llid, level: Math.round(level) });
     }
 
     post(url, data) {
