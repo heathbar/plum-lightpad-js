@@ -77,10 +77,22 @@ function findLocalLightpads() {
     socket.bind(() => {
         socket.setBroadcast(true);
         socket.send('PLUM', 0, 4, 43770, "255.255.255.255");
-        setTimeout(() => socket.close(), 5000);
+        // after 5 seconds, send out another probe
+        setTimeout(() => {
+            socket.send('PLUM', 0, 4, 43770, "255.255.255.255");
+
+            // after 5 seconds, send out another probe
+            setTimeout(() => {
+                socket.send('PLUM', 0, 4, 43770, "255.255.255.255");
+
+                // after 5 seconds, close the socket
+                setTimeout(() => socket.close(), 5000);
+            }, 5000);
+            
+        }, 5000);
     });
 
-    return subject.asObservable();
+    return subject.asObservable().distinctUntilChanged((data) => data.id);
 };
 
 /**
