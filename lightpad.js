@@ -13,9 +13,9 @@ module.exports = class PlumLightpad {
         Object.assign(Object.assign(this, cloudData), localData);
 
         let events = new Rx.Subject();
-        this.events = events.distinctUntilChanged(null, (x) => JSON.stringify(x)).asObservable();
+        this.events = events.distinctUntilChanged(null, (e) => JSON.stringify(e)).asObservable();
 
-        let socket = net.createConnection(2708, '10.1.1.34', () => {
+        let socket = net.createConnection(localData.eventPort, localData.address, () => {
 
             // Turn the data events into an Observable sequence
             let connections = Rx.Observable.fromEvent(socket, 'data');
