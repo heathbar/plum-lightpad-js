@@ -7,8 +7,15 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/heathbar/plum-lightpad-js.git"
+  },
   "author": "Heath Paddock <hp@heathpaddock.com> (https://heathpaddock.com)",
   "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/heathbar/plum-lightpad-js/issues"
+  },
   "dependencies": {
     "crypto": "0.0.3",
     "dgram": "^1.0.1",
