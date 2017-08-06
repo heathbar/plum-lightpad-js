@@ -14,7 +14,7 @@
   "author": "Heath Paddock <hp@heathpaddock.com> (https://heathpaddock.com)",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/heathbar/vizio-smart-cast/issues"
+    "url": "https://github.com/heathbar/plum-lightpad-js/issues"
   },
   "dependencies": {
     "crypto": "0.0.3",
